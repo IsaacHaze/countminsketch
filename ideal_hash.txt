@@ -1,0 +1,39 @@
+Properties of an ideal hash
+
+With the understanding that collisions will be inevitable in all but
+the most specialized of cases, a primary goal in developing a hash
+function for lookup is to minimize collisions. This typically means
+forcing a uniform distribution of the hash value, much like a random
+number generator. However, unlike a random number generator, the
+process must be repeatable so that the same key hashes to the same
+index, while different keys do not. This goal can be broken down into
+two general properties of an ideal hash.
+
+An ideal hash will permute its internal state such that every
+resulting hash value has exactly one input that will produce it. Any
+hash function that uses every part of the key to calculate the hash
+value will typically meet this requirement, so general hash functions
+that only process a part of the key will almost always be very poor
+because the differing parts of the key may not be the parts involved
+in creating the hash value. A good example of this is only hashing the
+first four or five characters of a string, and then using the
+algorithm to hash URLs that start with “http://”.
+
+A hash function is said to achieve avalanche if the resulting hash
+value is wildly different if even a single bit is different in the
+key. This effect aids distribution because similar keys will not have
+similar hash values. A hash function that distributes the hash values
+in a uniform manner will minimize collisions and fill the array more
+evenly. Avalanche is a concept derived from cryptographic hashing, and
+it offers a way to ensure that a hash function is good when used for
+table lookup.
+
+Often you will see hash functions that claim to be "best for strings"
+or “best for integers”. These functions should be avoided because if a
+hash function is not good for all types of data then it is probably a
+poor algorithm in general. Sometimes, on the other hand, a hash
+function may be optimized for a single type for performance
+reasons. It is good to learn to tell the difference between the two,
+but a safe practice is to only use general hash functions that are
+known to be good. This tutorial offers several examples of good
+general hash functions.
