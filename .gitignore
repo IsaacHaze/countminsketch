@@ -1,1 +1,9 @@
+# emacs junk
 *~
+\#*
+.#*
+
+*.pyc
+/dist/
+/*.egg-info
+/build/
