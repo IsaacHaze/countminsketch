@@ -29,17 +29,19 @@ class CountMinSketch(object):
 
         self._init_hash_params()
 
-    def update(self, e, c):
+    def __setitem__(self, e, c):
         """Update (increment) the counts for element `e` by `c`."""
         self.total += c
         for i in range(self.d):
             h = self.hash(i, e)
             self.counts[i][h] += c
+    update = __setitem__
 
-    def estimate(self, e):
+    def __getitem__(self, e):
         """Estimate the accumulated counts for element `e`."""
         estimates = [self.counts[i][self.hash(i, e)] for i in range(self.d)]
         return min(estimates)
+    estimate = __getitem__
 
     def _init_hash_params(self):
         self.a_b = []
